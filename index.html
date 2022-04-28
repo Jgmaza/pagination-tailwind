@@ -143,7 +143,7 @@
             }
 
         })
-        for (let index = 1; index <= Math.floor(imgs.length / 4); index++) {
+        for (let index = 1; index < Math.floor(imgs.length / 4); index++) {
             let p = document.getElementById("pages")
             p.innerHTML = p.innerHTML +
                 '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
@@ -177,6 +177,40 @@
                     images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + reader.result +
                         ' class="object-center object-cover w-80 m-5 hidden">'
                 }
+                console.log(as.length + "    " + imgs.length)
+                if ((as.length) * 4 < imgs.length) {
+
+
+                    let p = document.getElementById("pages")
+                    p.innerHTML = p.innerHTML +
+                        '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
+                        (Math.floor(imgs.length / 4) + 1) + '</button>'
+                    as = [...document.querySelectorAll("button")]
+                    as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
+                    let a = as[as.length - 1]
+                    a.addEventListener('click', () => {
+                        let imgtags = document.querySelectorAll("img")
+                        as.forEach(element => element.className =
+                            "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                        )
+                        a.className =
+                            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+
+                        let c = document.getElementById("currentPage")
+
+                        c.innerHTML = a.innerHTML
+                        imgtags.forEach((e, i) => {
+                            if (+(a.innerHTML.trim()) * 4 > i && ((+(a.innerHTML.trim()) -
+                                    1) * 4) <= i) {
+                                e.className = "object-center object-cover w-80 m-5"
+                            } else {
+                                e.className = "object-center object-cover w-80 m-5 hidden"
+                            }
+                        })
+                    })
+                    document.getElementById("numberPage").innerHTML = as.length
+                }
+                as[as.length - 1].click()
             };
             reader.onerror = function (error) {
                 console.log('Error: ', error);
@@ -219,16 +253,38 @@
                             .value +
                             ' class="object-center object-cover w-80 m-5 hidden">'
                     }
-                    if (as.length + 1 * 4 > imgs.length) {
+
+                    if ((as.length) * 4 < imgs.length) {
 
 
                         let p = document.getElementById("pages")
                         p.innerHTML = p.innerHTML +
                             '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
-                            (index + 1) + '</button>'
+                            (Math.floor(imgs.length / 4) + 1) + '</button>'
                         as = [...document.querySelectorAll("button")]
                         as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
-                        asas[as.length - 1].addEventListener("click", eventButtons)
+                        let a = as[as.length - 1]
+                        a.addEventListener('click', () => {
+                            let imgtags = document.querySelectorAll("img")
+                            as.forEach(element => element.className =
+                                "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                            )
+                            a.className =
+                                "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+
+                            let c = document.getElementById("currentPage")
+
+                            c.innerHTML = a.innerHTML
+                            imgtags.forEach((e, i) => {
+                                if (+(a.innerHTML.trim()) * 4 > i && ((+(a.innerHTML.trim()) -
+                                        1) * 4) <= i) {
+                                    e.className = "object-center object-cover w-80 m-5"
+                                } else {
+                                    e.className = "object-center object-cover w-80 m-5 hidden"
+                                }
+                            })
+                        })
+                        document.getElementById("numberPage").innerHTML = as.length
                     }
                     as[as.length - 1].click()
                 }
@@ -240,7 +296,9 @@
 
 
 
-        const eventButtons = () => {
+
+
+        as.forEach(a => a.addEventListener('click', () => {
             let imgtags = document.querySelectorAll("img")
             as.forEach(element => element.className =
                 "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
@@ -258,9 +316,7 @@
                     e.className = "object-center object-cover w-80 m-5 hidden"
                 }
             })
-        }
-
-        as.forEach(a => a.addEventListener('click', eventButtons))
+        }))
 
 
         inputR.addEventListener('click', (e) => {
