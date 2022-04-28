@@ -37,7 +37,6 @@
                         </div>
 
 
-
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 sm:col-span-2">
                                 <label for="company-website" class="block text-sm font-medium text-gray-700"> Link
@@ -54,7 +53,7 @@
                         </div>
                         ó
                         <div>
-                            <input id="file-upload" type="file" accept="image/*">
+                            <input id="file" type="file" />
                         </div>
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -72,9 +71,9 @@
                 <div>
                     <p class=" text-sm text-gray-700">
                         Showing
-                        <span class="font-medium">1</span>
+                        <span id="currentPage" class="font-medium">1</span>
                         of
-                        <span class="font-medium">10</span>
+                        <span id="numberPage" class="font-medium">1</span>
                         results
                     </p>
                 </div>
@@ -126,7 +125,6 @@
         let save = document.getElementById("save")
         let inputR = document.getElementById("right")
         let inputL = document.getElementById("left")
-        let file = document.getElementById("file-upload")
 
         if (imgs !== null) {
             imgs = JSON.parse(imgs)
@@ -153,43 +151,85 @@
         }
 
         let as = [...document.querySelectorAll("button")]
+        as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
 
-        save.addEventListener('click', () => {
-
-            if (title.value == "" || description.value == "") {
-                alert("faltan campos por llenar")
+        document.getElementById("numberPage").innerHTML = as.length
 
 
-            } else if (link.value == "") {
-                alert("Ingrese una imagen por alguna de las 2 opciones")
-            } else {
+        function getBase64(file) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
                 let img = {
                     title: title.value,
                     description: description.value,
-                    type: "url",
-                    link: link.value
+                    type: "local",
+                    link: reader.result
                 }
                 imgs.push(img)
                 window.localStorage.setItem("images", JSON.stringify(imgs))
 
-                images.innerHTML = images.innerHTML + '<img src=' + link.value +
-                    ' class="object-center object-cover w-80 m-5">'
+                if (images.childElementCount <= 3) {
+                    images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + reader.result +
+                        ' class="object-center object-cover w-80 m-5">'
+
+                } else {
+                    images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + reader.result +
+                        ' class="object-center object-cover w-80 m-5 hidden">'
+                }
+            };
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
+        }
+
+        save.addEventListener('click', () => {
+            var files = document.getElementById('file').files;
+            if (title.value == "" || description.value == "") {
+                alert("Faltan campos por llenar")
+
+
+            } else if (link.value == "" && files.length == 0) {
+                alert("Escoja una de las opciones de imagen")
+            } else if (link.value != "" && files.length > 0) {
+                alert("Escoja sola una de las dos opciones de imagen")
+            } else {
+
+                if (files.length > 0) {
+                    getBase64(files[0]);
+                } else {
+
+
+                    let img = {
+                        title: title.value,
+                        description: description.value,
+                        type: "url",
+                        link: link.value
+                    }
+                    imgs.push(img)
+                    window.localStorage.setItem("images", JSON.stringify(imgs))
+
+                    if (images.childElementCount <= 3) {
+                        images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + link
+                            .value +
+                            ' class="object-center object-cover w-80 m-5">'
+
+                    } else {
+                        images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + link
+                            .value +
+                            ' class="object-center object-cover w-80 m-5 hidden">'
+                    }
+                }
+                as[as.length - 1].click()
+
             }
 
         })
 
 
-        file.onchange = () => {
-            let reader = new FileReader()
-            reader.readAsDataURL(file.files[0])
-            console.log(file.files[0])
-        }
 
 
 
-
-
-        as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
         as.forEach(a => a.addEventListener('click', () => {
             let imgtags = document.querySelectorAll("img")
             as.forEach(element => element.className =
@@ -197,6 +237,10 @@
             )
             a.className =
                 "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+
+            let c = document.getElementById("currentPage")
+
+            c.innerHTML = a.innerHTML
             imgtags.forEach((e, i) => {
                 if (+(a.innerHTML.trim()) * 4 > i && ((+(a.innerHTML.trim()) - 1) * 4) <= i) {
                     e.className = "object-center object-cover w-80 m-5"
@@ -222,15 +266,11 @@
 
 
         inputL.addEventListener('click', (e) => {
-            if (+(as[as.length - 1].innerHTML.trim()) != as.length) {
-                as.forEach(element => {
-                    element.innerHTML = +element.innerHTML + 3
 
-                });
-                as.forEach(element => element.className =
-                    "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                )
-            }
+            as.forEach(element => element.className =
+                "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+            )
+
         })
     </script>
 </body>
