@@ -1,353 +1,436 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body>
-    <style>
-
-    </style>
+  <body>
+    <style></style>
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="flex justify-center m-10 ">
-        <div class="flex flex-col">
-            <div>
-
-                <div class="shadow sm:rounded-md sm:overflow-hidden">
-                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-
-                        <div>
-                            <label for="about" class="block text-sm font-medium text-gray-700"> Title </label>
-                            <div class="mt-1">
-                                <textarea id="title" name="about" rows="3"
-                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                    placeholder=""></textarea>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="about" class="block text-sm font-medium text-gray-700"> Description </label>
-                            <div class="mt-1">
-                                <textarea id="description" name="about" rows="3"
-                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                    placeholder=""></textarea>
-                            </div>
-                        </div>
-
-
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="col-span-3 sm:col-span-2">
-                                <label for="company-website" class="block text-sm font-medium text-gray-700"> Link
-                                    image </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <span
-                                        class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                                        http:// </span>
-                                    <input type="text" name="company-website" id="link"
-                                        class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                        placeholder="www.example.com">
-                                </div>
-                            </div>
-                        </div>
-                        ó
-                        <div>
-                            <input id="file" type="file" />
-                        </div>
-                    </div>
-                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button id="save"
-                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
-                    </div>
+    <div class="flex justify-center m-10">
+      <div class="flex flex-col">
+        <div>
+          <div class="shadow sm:rounded-md sm:overflow-hidden">
+            <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+              <div>
+                <label
+                  for="about"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Title
+                </label>
+                <div class="mt-1">
+                  <textarea
+                    id="title"
+                    name="about"
+                    rows="3"
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                    placeholder=""
+                  ></textarea>
                 </div>
-
-            </div>
-            <div id="images" class="flex justify-betwween flex-row flex-wrap border-solid border-2 border-slate-200 ">
-
-
-            </div>
-            <div class="flex justify-around mt-10">
-                <div>
-                    <p class=" text-sm text-gray-700">
-                        Showing
-                        <span id="currentPage" class="font-medium">1</span>
-                        of
-                        <span id="numberPage" class="font-medium">1</span>
-                        results
-                    </p>
+              </div>
+              <div>
+                <label
+                  for="about"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Description
+                </label>
+                <div class="mt-1">
+                  <textarea
+                    id="description"
+                    name="about"
+                    rows="3"
+                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                    placeholder=""
+                  ></textarea>
                 </div>
-                <div>
+              </div>
 
-                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                        <button id="right"
-                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Previous</span>
-                            <!-- Heroicon name: solid/chevron-left -->
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                        <div class="relative z-1 inline-flex rounded-md shadow-sm -space-x-px" id="pages">
-                            <button aria-current="page"
-                                class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                                1 </button>
-                        </div>
-
-                        <button id="left"
-                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Next</span>
-                            <!-- Heroicon name: solid/chevron-right -->
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                    </nav>
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3 sm:col-span-2">
+                  <label
+                    for="company-website"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Link image
+                  </label>
+                  <div class="mt-1 flex rounded-md shadow-sm">
+                    <span
+                      class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"
+                    >
+                      http://
+                    </span>
+                    <input
+                      type="text"
+                      name="company-website"
+                      id="link"
+                      class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                      placeholder="www.example.com"
+                    />
+                  </div>
                 </div>
+              </div>
+              ó
+              <div>
+                <input id="file" type="file" />
+              </div>
             </div>
+            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <button
+                id="save"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </div>
+        <div
+          id="images"
+          class="flex justify-betwween flex-row flex-wrap border-solid border-2 border-slate-200"
+        ></div>
+        <div class="flex justify-around mt-10">
+          <div>
+            <p class="text-sm text-gray-700">
+              Showing
+              <span id="currentPage" class="font-medium">1</span>
+              of
+              <span id="numberPage" class="font-medium">1</span>
+              results
+            </p>
+          </div>
+          <div>
+            <nav
+              class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+              aria-label="Pagination"
+            >
+              <button
+                id="right"
+                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              >
+                <span class="sr-only">Previous</span>
+                <!-- Heroicon name: solid/chevron-left -->
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+              <div
+                class="relative z-1 inline-flex rounded-md shadow-sm -space-x-px"
+                id="pages"
+              >
+                <button
+                  aria-current="page"
+                  class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                >
+                  1
+                </button>
+              </div>
+
+              <button
+                id="left"
+                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              >
+                <span class="sr-only">Next</span>
+                <!-- Heroicon name: solid/chevron-right -->
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
-        let imgs = window.localStorage.getItem("images")
+      let imgs = window.localStorage.getItem("images");
 
+      let images = document.getElementById("images");
+      let title = document.getElementById("title");
+      let description = document.getElementById("description");
+      let link = document.getElementById("link");
+      let save = document.getElementById("save");
+      let inputR = document.getElementById("right");
+      let inputL = document.getElementById("left");
 
-        let images = document.getElementById("images")
-        let title = document.getElementById("title")
-        let description = document.getElementById("description")
-        let link = document.getElementById("link")
-        let save = document.getElementById("save")
-        let inputR = document.getElementById("right")
-        let inputL = document.getElementById("left")
+      if (imgs !== null) {
+        imgs = JSON.parse(imgs);
+      } else {
+        imgs = [];
+      }
 
-        if (imgs !== null) {
-            imgs = JSON.parse(imgs)
+      imgs.forEach((item) => {
+        if (images.childElementCount <= 3) {
+          images.innerHTML =
+            images.innerHTML +
+            '<img title="' +
+            item.title +
+            ' "src=' +
+            item.link +
+            ' class="object-center object-cover w-80 m-5">';
         } else {
-            imgs = []
+          images.innerHTML =
+            images.innerHTML +
+            '<img title="' +
+            item.title +
+            ' "src=' +
+            item.link +
+            ' class="object-center object-cover w-80 m-5 hidden">';
         }
+      });
+      for (let index = 1; index <= Math.floor(imgs.length / 4); index++) {
+        let p = document.getElementById("pages");
+        p.innerHTML =
+          p.innerHTML +
+          '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
+          (index + 1) +
+          "</button>";
+      }
 
-        imgs.forEach((item) => {
+      let as = [...document.querySelectorAll("button")];
+      as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1);
+
+      document.getElementById("numberPage").innerHTML = as.length;
+
+      function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+          let img = {
+            title: title.value,
+            description: description.value,
+            type: "local",
+            link: reader.result,
+          };
+          imgs.push(img);
+          window.localStorage.setItem("images", JSON.stringify(imgs));
+
+          if (images.childElementCount <= 3) {
+            images.innerHTML =
+              images.innerHTML +
+              '<img title="' +
+              title.value +
+              ' "src=' +
+              reader.result +
+              ' class="object-center object-cover w-80 m-5">';
+          } else {
+            images.innerHTML =
+              images.innerHTML +
+              '<img title="' +
+              title.value +
+              ' "src=' +
+              reader.result +
+              ' class="object-center object-cover w-80 m-5 hidden">';
+          }
+          console.log(as.length + "    " + imgs.length);
+          if (as.length * 4 < imgs.length) {
+            let p = document.getElementById("pages");
+            p.innerHTML =
+              p.innerHTML +
+              '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
+              (Math.floor(imgs.length / 4) + 1) +
+              "</button>";
+            as = [...document.querySelectorAll("button")];
+            as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1);
+            let a = as[as.length - 1];
+            a.addEventListener("click", () => {
+              let imgtags = document.querySelectorAll("img");
+              as.forEach(
+                (element) =>
+                  (element.className =
+                    "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium")
+              );
+              a.className =
+                "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
+
+              let c = document.getElementById("currentPage");
+
+              c.innerHTML = a.innerHTML;
+              imgtags.forEach((e, i) => {
+                if (
+                  +a.innerHTML.trim() * 4 > i &&
+                  (+a.innerHTML.trim() - 1) * 4 <= i
+                ) {
+                  e.className = "object-center object-cover w-80 m-5";
+                } else {
+                  e.className = "object-center object-cover w-80 m-5 hidden";
+                }
+              });
+            });
+            document.getElementById("numberPage").innerHTML = as.length;
+          }
+          as[as.length - 1].click();
+        };
+        reader.onerror = function (error) {
+          console.log("Error: ", error);
+        };
+      }
+
+      save.addEventListener("click", () => {
+        var files = document.getElementById("file").files;
+        if (title.value == "" || description.value == "") {
+          alert("Faltan campos por llenar");
+        } else if (link.value == "" && files.length == 0) {
+          alert("Escoja una de las opciones de imagen");
+        } else if (link.value != "" && files.length > 0) {
+          alert("Escoja sola una de las dos opciones de imagen");
+        } else {
+          if (files.length > 0) {
+            getBase64(files[0]);
+          } else {
+            let img = {
+              title: title.value,
+              description: description.value,
+              type: "url",
+              link: link.value,
+            };
+            imgs.push(img);
+            window.localStorage.setItem("images", JSON.stringify(imgs));
+
             if (images.childElementCount <= 3) {
-                images.innerHTML = images.innerHTML + '<img title="' + item.title + ' "src=' + item.link +
-                    ' class="object-center object-cover w-80 m-5">'
-
+              images.innerHTML =
+                images.innerHTML +
+                '<img title="' +
+                title.value +
+                ' "src=' +
+                link.value +
+                ' class="object-center object-cover w-80 m-5">';
             } else {
-                images.innerHTML = images.innerHTML + '<img title="' + item.title + ' "src=' + item.link +
-                    ' class="object-center object-cover w-80 m-5 hidden">'
+              images.innerHTML =
+                images.innerHTML +
+                '<img title="' +
+                title.value +
+                ' "src=' +
+                link.value +
+                ' class="object-center object-cover w-80 m-5 hidden">';
             }
 
-        })
-        for (let index = 1; index <= Math.floor(imgs.length / 4); index++) {
-            let p = document.getElementById("pages")
-            p.innerHTML = p.innerHTML +
+            if (as.length * 4 < imgs.length) {
+              let p = document.getElementById("pages");
+              p.innerHTML =
+                p.innerHTML +
                 '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
-                (index + 1) + '</button>'
-        }
+                (Math.floor(imgs.length / 4) + 1) +
+                "</button>";
+              as = [...document.querySelectorAll("button")];
+              as = as.filter(
+                (item, i) => i != 0 && i != 1 && i != as.length - 1
+              );
 
-        let as = [...document.querySelectorAll("button")]
-        as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
+              as.forEach((a) =>
+                a.addEventListener("click", () => {
+                  let imgtags = document.querySelectorAll("img");
+                  as.forEach(
+                    (element) =>
+                      (element.className =
+                        "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium")
+                  );
+                  a.className =
+                    "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
 
-        document.getElementById("numberPage").innerHTML = as.length
+                  let c = document.getElementById("currentPage");
 
-
-        function getBase64(file) {
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-                let img = {
-                    title: title.value,
-                    description: description.value,
-                    type: "local",
-                    link: reader.result
-                }
-                imgs.push(img)
-                window.localStorage.setItem("images", JSON.stringify(imgs))
-
-                if (images.childElementCount <= 3) {
-                    images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + reader.result +
-                        ' class="object-center object-cover w-80 m-5">'
-
-                } else {
-                    images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + reader.result +
-                        ' class="object-center object-cover w-80 m-5 hidden">'
-                }
-                console.log(as.length + "    " + imgs.length)
-                if ((as.length) * 4 < imgs.length) {
-
-
-                    let p = document.getElementById("pages")
-                    p.innerHTML = p.innerHTML +
-                        '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
-                        (Math.floor(imgs.length / 4) + 1) + '</button>'
-                    as = [...document.querySelectorAll("button")]
-                    as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
-                    let a = as[as.length - 1]
-                    a.addEventListener('click', () => {
-                        let imgtags = document.querySelectorAll("img")
-                        as.forEach(element => element.className =
-                            "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                        )
-                        a.className =
-                            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-
-                        let c = document.getElementById("currentPage")
-
-                        c.innerHTML = a.innerHTML
-                        imgtags.forEach((e, i) => {
-                            if (+(a.innerHTML.trim()) * 4 > i && ((+(a.innerHTML.trim()) -
-                                    1) * 4) <= i) {
-                                e.className = "object-center object-cover w-80 m-5"
-                            } else {
-                                e.className = "object-center object-cover w-80 m-5 hidden"
-                            }
-                        })
-                    })
-                    document.getElementById("numberPage").innerHTML = as.length
-                }
-                as[as.length - 1].click()
-            };
-            reader.onerror = function (error) {
-                console.log('Error: ', error);
-            };
-        }
-
-        save.addEventListener('click', () => {
-            var files = document.getElementById('file').files;
-            if (title.value == "" || description.value == "") {
-                alert("Faltan campos por llenar")
-
-
-            } else if (link.value == "" && files.length == 0) {
-                alert("Escoja una de las opciones de imagen")
-            } else if (link.value != "" && files.length > 0) {
-                alert("Escoja sola una de las dos opciones de imagen")
-            } else {
-
-                if (files.length > 0) {
-                    getBase64(files[0]);
-                } else {
-
-
-                    let img = {
-                        title: title.value,
-                        description: description.value,
-                        type: "url",
-                        link: link.value
-                    }
-                    imgs.push(img)
-                    window.localStorage.setItem("images", JSON.stringify(imgs))
-
-                    if (images.childElementCount <= 3) {
-                        images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + link
-                            .value +
-                            ' class="object-center object-cover w-80 m-5">'
-
+                  c.innerHTML = a.innerHTML;
+                  imgtags.forEach((e, i) => {
+                    if (
+                      +a.innerHTML.trim() * 4 > i &&
+                      (+a.innerHTML.trim() - 1) * 4 <= i
+                    ) {
+                      e.className = "object-center object-cover w-80 m-5";
                     } else {
-                        images.innerHTML = images.innerHTML + '<img title="' + title.value + ' "src=' + link
-                            .value +
-                            ' class="object-center object-cover w-80 m-5 hidden">'
+                      e.className =
+                        "object-center object-cover w-80 m-5 hidden";
                     }
+                  });
+                })
+              );
 
-                    if ((as.length) * 4 < imgs.length) {
-
-
-                        let p = document.getElementById("pages")
-                        p.innerHTML = p.innerHTML +
-                            '<button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">' +
-                            (Math.floor(imgs.length / 4) + 1) + '</button>'
-                        as = [...document.querySelectorAll("button")]
-                        as = as.filter((item, i) => i != 0 && i != 1 && i != as.length - 1)
-                        let a = as[as.length - 1]
-                        a.addEventListener('click', () => {
-                            let imgtags = document.querySelectorAll("img")
-                            as.forEach(element => element.className =
-                                "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                            )
-                            a.className =
-                                "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-
-                            let c = document.getElementById("currentPage")
-
-                            c.innerHTML = a.innerHTML
-                            imgtags.forEach((e, i) => {
-                                if (+(a.innerHTML.trim()) * 4 > i && ((+(a.innerHTML.trim()) -
-                                        1) * 4) <= i) {
-                                    e.className = "object-center object-cover w-80 m-5"
-                                } else {
-                                    e.className = "object-center object-cover w-80 m-5 hidden"
-                                }
-                            })
-                        })
-                        document.getElementById("numberPage").innerHTML = as.length
-                    }
-                    as[as.length - 1].click()
-                }
-
-
+              document.getElementById("numberPage").innerHTML = as.length;
             }
+            as[as.length - 1].click();
+          }
+        }
+      });
 
-        })
+      as.forEach((a) =>
+        a.addEventListener("click", () => {
+          let imgtags = document.querySelectorAll("img");
+          as.forEach(
+            (element) =>
+              (element.className =
+                "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium")
+          );
+          a.className =
+            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
 
+          let c = document.getElementById("currentPage");
 
-
-
-
-        as.forEach(a => a.addEventListener('click', () => {
-            let imgtags = document.querySelectorAll("img")
-            as.forEach(element => element.className =
-                "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            )
-            a.className =
-                "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-
-            let c = document.getElementById("currentPage")
-
-            c.innerHTML = a.innerHTML
-            imgtags.forEach((e, i) => {
-                if (+(a.innerHTML.trim()) * 4 > i && ((+(a.innerHTML.trim()) - 1) * 4) <= i) {
-                    e.className = "object-center object-cover w-80 m-5"
-                } else {
-                    e.className = "object-center object-cover w-80 m-5 hidden"
-                }
-            })
-        }))
-
-
-        inputR.addEventListener('click', (e) => {
-
-            let currentNumber = document.getElementsByClassName(
-                "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            )[0].innerHTML.trim()
-            if (currentNumber != "1") {
-                as[+currentNumber - 1].className =
-                    "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                as[+currentNumber - 2].className =
-                    "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                as[+currentNumber - 2].click()
+          c.innerHTML = a.innerHTML;
+          imgtags.forEach((e, i) => {
+            if (
+              +a.innerHTML.trim() * 4 > i &&
+              (+a.innerHTML.trim() - 1) * 4 <= i
+            ) {
+              e.className = "object-center object-cover w-80 m-5";
+            } else {
+              e.className = "object-center object-cover w-80 m-5 hidden";
             }
+          });
         })
+      );
 
+      inputR.addEventListener("click", (e) => {
+        let currentNumber = document
+          .getElementsByClassName(
+            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+          )[0]
+          .innerHTML.trim();
+        if (currentNumber != "1") {
+          as[+currentNumber - 1].className =
+            "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
+          as[+currentNumber - 2].className =
+            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
+          as[+currentNumber - 2].click();
+        }
+      });
 
-        inputL.addEventListener('click', (e) => {
-
-            let currentNumber = document.getElementsByClassName(
-                "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            )[0].innerHTML.trim()
-            if (currentNumber != as.length) {
-                as[+currentNumber - 1].className =
-                    "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                as[+currentNumber].className =
-                    "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                as[+currentNumber].click()
-            }
-        })
+      inputL.addEventListener("click", (e) => {
+        let currentNumber = document
+          .getElementsByClassName(
+            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+          )[0]
+          .innerHTML.trim();
+        if (currentNumber != as.length) {
+          as[+currentNumber - 1].className =
+            "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
+          as[+currentNumber].className =
+            "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium";
+          as[+currentNumber].click();
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>
