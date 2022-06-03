@@ -1,2 +1,2 @@
 # pagination-tailwind
-basic page design in tailwind with pagination delevoped with javascript
+basic page designed in tailwind with pagination delevoped with javascript
